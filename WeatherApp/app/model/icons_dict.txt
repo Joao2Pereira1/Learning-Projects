@@ -1,0 +1,1 @@
+Sunny,app/icons/sunny.png

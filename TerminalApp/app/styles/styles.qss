@@ -1,0 +1,27 @@
+QPlainTextEdit {
+    color: #000; /* light grey text color */
+    font-size: 20px;
+    font-family: Open Sans;
+    border: 2px solid #333; /* darker grey border */
+    border-radius: 5px;
+}
+
+QPushButton {
+    background-color: #333; /* dark grey background */
+    color: #ccc; /* light grey text color */
+    font-size: 17px;
+    font-family: Open Sans;
+    border: 2px solid #444; /* darker grey border */
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+QPushButton:hover {
+    background-color: #444; /* darker grey hover state */
+}
+
+QLabel {
+    color: #000; /* light grey text color */
+    font-size: 18px;
+    font-family: Open Sans;
+}

@@ -1,0 +1,24 @@
+{
+	"sqltools.connections": [
+		{
+			"mysqlOptions": {
+				"authProtocol": "default",
+				"enableSsl": "Disabled"
+			},
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 3306,
+			"driver": "MySQL",
+			"name": "Local instance MySQL80",
+			"username": "root",
+			"database": "sport"
+		}
+	],
+	"docwriter.style": "Google",
+	"docwriter.progress.trackClasses": true,
+	"docwriter.progress.trackTypes": true,
+	"cSpell.words": ["levelname"],
+	"prettier.useTabs": false,
+	"prettier.semi": false,
+	"prettier.tabWidth": 4
+}

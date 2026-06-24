@@ -1,0 +1,103 @@
+In case u need help use poetry --help, git --help or something like that
+
+#Fast
+
+pyenv local 3.8.18
+poetry new project_name
+cd project_name
+poetry env use python
+poetry install
+poetry shell
+
+
+#Packages commands
+
+# List all packages
+pip list 
+
+# Remove unwanted package
+pip uninstall package-name
+
+--------------
+
+With poetry:
+
+Basically do this:
+
+#setting new python version
+poetry env use 3.8   
+
+#updating dependencies
+poetry install
+
+#best command it creates the layout files
+poetry new poetry-demo
+
+#installing packages
+poetry add package name
+
+#unistalling packages
+poetry remove pendulum
+
+#creates virtual env
+poetry install ->it will install what it needs to create virtual env and create it 
+
+#activate env
+poetry shell
+
+#deativate env
+exit
+
+----
+
+Extra:
+
+#create toml file for dependencies
+poetry init
+
+#installing dependencies
+poetry install 
+
+#updating dependencies
+poetry add pendulum 
+
+#creates virtual env
+poetry install ->it will install what it needs to create virtual env and create it 
+
+#activate env
+poetry shell
+
+#deativate env
+deactivate
+
+#install packages
+poetry add requests   or poetry add requests, mkdocs,pytest
+
+#info about env
+poetry env info
+
+#list config
+poetry config --list
+
+#list env
+poetry env list
+
+#command for creating a venv in local dir
+poetry config virtualenvs.in-project true
+
+--------------
+
+With python venv integrated:
+
+#creates virtual env
+python -m venv .env   
+
+#activate env
+.env\Scripts\activate.ps1 
+
+#deativate env
+deactivate
+
+#remove
+rm -r .env 
+

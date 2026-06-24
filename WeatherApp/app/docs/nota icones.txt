@@ -1,0 +1,15 @@
+Poderias fazer assim mas assim perdias muito tempo e não podias escolher os proprios
+icones, então em vez de fazer a request pelo url do icon do tempo, e depois guardar
+o conteudo numa imagem e mostrar essa imagem, ver se está sunny e usar as imagens locais,
+tendo um dicionario como weather_icons = {sunny: sunny.png, ...}
+
+Em alternativa podes fazer assim:
+
+weather_icon_url = "https://cdn.weatherapi.com/weather/64x64/day/113.png"
+response = requests.get(weather_icon_url)
+
+if response.status_code == 200:
+    with open("icon.png", "wb") as f:
+        f.write(response.content)
+else:
+    print("Erro ao baixar a imagem:", response.status_code)

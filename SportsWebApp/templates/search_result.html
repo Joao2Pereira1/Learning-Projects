@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<!--  this is the result of the search members-->
+
+<html lang="en-us">
+    <head>
+        <meta name="viewport" content="initial-scale=1,width=width-device" />
+        <title>Search Page</title>
+        <link rel="stylesheet" href="/static/css/main.css" />
+    </head>
+    <body class="light-mode center large" id="dark_mode">
+        <h1 class="extralarge center">Result:</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name:</th>
+                    <th>Sport:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- this is JINJA a language that its used in FLASK  -->
+                {% for row in result%}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="small" href="/">HOME PAGE</a><br />
+
+        <button class="button" onclick="dark_mode();">Dark Mode</button>
+
+        <script>
+            function dark_mode() {
+                const element = document.getElementById("dark_mode")
+                element.classList.toggle("dark-mode") // this will toggle the class light-mode to dark-mode
+            }
+        </script>
+    </body>
+</html>

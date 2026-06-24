@@ -1,0 +1,118 @@
+/* TO OVERWRITE METHODS USE +*important */
+
+/* Light mode styles */
+.light-mode {
+    background-color: antiquewhite;
+    color: grey;
+}
+/* Dark mode styles */
+.dark-mode {
+    background-color: grey;
+    color: antiquewhite;
+}
+/* Font size styles */
+.small {
+    font-size: small;
+}
+.medium {
+    font-size: medium;
+}
+.large {
+    font-size: large;
+}
+.extralarge {
+    font-size: xx-large;
+}
+/* Text alignment styles */
+.left {
+    text-align: left;
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.top {
+    text-align: top;
+}
+.bottom {
+    text-align: bottom;
+}
+/* Background color styles */
+.blue {
+    background-color: blue;
+}
+.black {
+    background-color: black;
+}
+.yellow {
+    background-color: yellow;
+}
+.grey {
+    background-color: dimgrey;
+}
+.white {
+    background-color: white;
+}
+/* Text color styles */
+.white_text {
+    color: antiquewhite;
+}
+.grey_text {
+    color: grey;
+}
+/* Image styles */
+.center_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+/* Opacity style */
+.opacity {
+    opacity: 50%;
+}
+/* Table styles */
+.table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 3px solid rgb(242, 230, 242);
+    border-color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 2px;
+    max-width: 300px;
+    width: 80%;
+}
+/* Form styles */
+.form {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    box-shadow: #333;
+    font-size: medium;
+    font-size: large;
+}
+/* Chat paragraph styles */
+.chat p {
+    align-items: center;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    scroll-margin-inline: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border: 3px solid #ccc;
+    max-width: 300px;
+    width: 50%;
+    height: 50%;
+}
+/* Button styles */
+.button {
+    background-color: dimgrey;
+    font-size: large;
+    align-items: center;
+    margin-top: 10px;
+}

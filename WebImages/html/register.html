@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Register Page</title>
+
+		<!-- Bootstrap minified CSS -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		/>
+
+		<!-- Optional theme -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+		/>
+
+		<!-- Personal Styles -->
+		<link rel="stylesheet" href="../css/style.css" />
+
+		<!-- jQuery  -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!--  Personal JavaScript -->
+		<script src="../js/registering.js"></script>
+	</head>
+
+	<body>
+		<h2 style="text-align: center">Register and Login Page</h2>
+		<br />
+		<p style="text-align: center; border-radius: 10px;background: #73AD21;padding: 1em; margin: 2em;"> 
+			Register here to gain access to the full features of our website!
+			Some of these features include image processing, such as converting to black and white or applying a blur effect.
+			You can also upload your own images to share with others, browse images uploaded by the community, leave comments, and give positive or negative votes.
+		</p>
+		<br>
+			<div style="text-align: center; ">
+				<input
+					id="new_username"
+					type="text"
+					placeholder="Username"
+					value=""
+				/>
+				<input
+					id="new_password"
+					type="text"
+					placeholder="Password"
+					value=""
+				/>
+				<button
+					style="
+						width: 70px;
+						height: 30px;
+						text-align: center;
+						background: rgba(9, 158, 9, 0.827);
+						padding: auto;
+					"
+					onclick="register()"
+				>
+					Register
+				</button>
+			</div>
+			<br />
+			<div style="text-align: center">
+				<input
+					id="username"
+					type="text"
+					placeholder="Username"
+					value=""
+				/>
+				<input
+					id="password"
+					type="text"
+					placeholder="Password"
+					value=""
+				/>
+				<button
+					style="
+						width: 70px;
+						height: 30px;
+						text-align: center;
+						background: rgba(9, 158, 9, 0.827);
+						padding: auto;
+					"
+					onclick="login()"
+				>
+					Login
+				</button>
+			</div>
+			<div
+				id="message"
+				style="text-align: center; padding-top: 20px"
+			></div>
+		</div>
+	</body>
+</html>

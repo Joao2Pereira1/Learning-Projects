@@ -1,0 +1,30 @@
+QLineEdit {
+    color: black;
+    font-size: 20px; /* reduced font size */
+    font-family: Open Sans; /* clear, readable font family */
+    border: 2px solid #ccc; /* light grey border */
+    border-radius: 5px;
+    padding: 5px 10px; /* added padding */
+}
+
+QPlainTextEdit {
+    color: #000; /* light grey text color */
+    font-size: 16px;
+    font-family: Open Sans;
+    border: 2px solid #333; /* darker grey border */
+    border-radius: 5px;
+}
+
+QPushButton {
+    background-color: #333; /* dark grey background */
+    color: #ccc; /* light grey text color */
+    font-size: 17px;
+    font-family: Open Sans;
+    border: 2px solid #444; /* darker grey border */
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+QPushButton:hover {
+    background-color: #444; /* darker grey hover state */
+}

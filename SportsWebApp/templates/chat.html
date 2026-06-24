@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+        <meta name="viewport" content="initial-scale=1,width=device-width" />
+        <title>Chat</title>
+        <link rel="stylesheet" href="/static/css/main.css" />
+        <!-- set up web sockets and jquery libraries -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    </head>
+
+    <body class="light-mode center large" id="dark_mode">
+        <fieldset class="extralarge">
+            Talk with your friends and have fun😊
+            <legend>Real Time Chat</legend>
+        </fieldset>
+
+        <p class="extralarge" style="font-weight: bold">Chat🪶</p>
+
+        <div id="messages_box" class="chat"></div>
+
+        <!-- name campus -->
+        <input
+            class="form"
+            type="text"
+            id="name"
+            placeholder="Name"
+            autocomplete="on"
+            autofocus="on"
+        />
+
+        <!-- message campus -->
+        <input
+            class="form"
+            type="text"
+            id="message"
+            placeholder="Type a message"
+            autocomplete="on"
+            autofocus="on"
+        />
+
+        <button class="form" id="send_button">Send</button>
+
+        <script type="text/javascript" charset="utf-8">
+            // Connect to the Socket.IO server.
+            $(document).ready(function () {
+                const socket = io("http://localhost:5000") // create web socket
+
+                // select document elements (hashtag used for ids)
+                const name = document.querySelector("#name")
+                const message = document.querySelector("#message")
+                const messages_box = document.querySelector("#messages_box")
+                const send_button = document.querySelector("#send_button")
+
+                // Event handler for new connections.
+                // The callback function is invoked when a connection with the
+                // server is established.
+                socket.on("connect", function () {
+                    console.log("Connected to the WebSocket")
+                })
+
+                // Event handler for server sent data.
+                // The callback function is invoked whenever the server emits data
+                // to the client. The data is then displayed in handle message
+
+                // when button pressed emit event message with data
+                $(send_button).on("click", function () {
+                    // get the message from the input field
+                    const user_name = name.value
+                    // get the message from the input field
+                    const msg = message.value
+                    // emit the message event to the server, data format dict{}
+                    socket.emit("message", { user_name, msg })
+                    // clear the input field, don't clear name box
+                    $(message).val("")
+                })
+
+                /* socket.on("message", function (data) { ... }); is a listener for the "message" event on the socket. 
+				When a "message" event is emitted, the callback function will be executed with the data parameter. */
+                socket.on("message", function (data) {
+                    console.log("Received message:", data)
+                    $(messages_box).append(
+                        "<p>" + data.name + " - " + data.data + "</p>"
+                    ) // Display message
+                    // data {"msg":"Hello"}, in js to access use data.msg, object
+                })
+
+                // Add event listener for Enter key press on input fields
+                $(message).on("keypress", function (e) {
+                    if (e.code === "Enter") {
+                        // Enter key
+                        $(send_button).click()
+                    }
+                })
+
+                // Error handling
+                socket.on("error", function (err) {
+                    console.error("Error occurred:", err)
+                })
+            })
+        </script>
+
+        <button class="button" onclick="dark_mode();">Dark Mode</button>
+        <script type="text/javascript" charset="utf-8">
+            // set up button for dark mode
+            function dark_mode() {
+                const element = document.getElementById("dark_mode")
+                element.classList.toggle("dark-mode") // this will toggle the class light-mode to dark-mode
+            }
+        </script>
+    </body>
+</html>

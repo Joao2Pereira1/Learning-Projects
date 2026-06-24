@@ -1,0 +1,10 @@
+site_name: Sports Regist Documentation
+
+theme: material
+
+nav:
+    - Home: index.md
+    - Register: register.md
+    - List: list.md
+    - About: about.md
+    - Shema: schema.md

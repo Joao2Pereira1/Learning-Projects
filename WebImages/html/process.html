@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Image Processing</title>
+
+		<!-- Bootstrap 3.4.1 CSS -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		/>
+
+		<!-- Personal Styles -->
+		<link rel="stylesheet" href="../css/style.css" />
+
+		<!-- jQuery library -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<!-- Javascript for Image Display -->
+		<script src="/js/processing.js"></script>
+
+		<style>
+			body {
+				font-size: 15px;
+				text-align: center;
+				background-color: #f9f9f9;
+				padding: 20px;
+			}
+
+			#originalImg,
+			#processedImg {
+				border: 3px solid #ccc;
+				min-height: 300px;
+				background: white;
+				padding: 10px;
+			}
+
+			.btn-input {
+				margin-bottom: 15px;
+			}
+
+			/* Responsividade: coluna lado a lado no md e maior, e empilhado no sm e xs */
+			@media (min-width: 992px) {
+				.columnleft,
+				.columnright {
+					float: none;
+					display: block;
+					margin: 0 auto;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>Image Processing</h1>
+			<hr />
+			<div class="row">
+				<div class="col-sm-6 btn-input">
+					<label for="idImg">Search Image by ID:</label>
+					<input
+						type="text"
+						id="idImg"
+						name="authorImg"
+						class="form-control"
+					/>
+					<button
+						class="btn btn-success btn-block"
+						onclick="displayImage()"
+					>
+						Refresh
+					</button>
+				</div>
+				<div class="col-sm-6 btn-input">
+					<label for="algorithm-select">Algorithm</label>
+					<select id="algorithm-select" class="form-control">
+						<option value="">--Please choose an option--</option>
+						<option value="gray_scale">Black and White</option>
+						<option value="invert_colors">Invert Colors</option>
+						<option value="resize_image">Resize Image</option>
+						<option value="blur_image">Blur Image</option>
+					</select>
+				</div>
+			</div>
+
+			<hr />
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>Original Image</h3>
+					<hr />
+					<div id="originalImg"></div>
+				</div>
+				<div class="col-sm-6">
+					<h3>Processed Image</h3>
+					<hr />
+					<div id="processedImg"></div>
+				</div>
+			</div>
+
+			<div class="row" style="margin: 2em">
+				<div class="col-sm-6 col-sm-offset-3">
+					<button
+						class="btn btn-success btn-block"
+						onclick="self.displayProcessedImage()"
+					>
+						Run
+					</button>
+					<button
+						class="btn btn-danger btn-block"
+						onclick="self.close()"
+						style="margin: 2em"
+					>
+						Close
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
