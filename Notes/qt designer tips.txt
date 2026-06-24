@@ -1,7 +1,0 @@
-pyuic5 -o mygui.py mygui.ui    command for compile a ui file into a python file
-
-- para fazer a tua aplicacao responsiva clica no objeto main window, etc com o botao direito e depois lay out > vertically ou algo, explicacao: https://stackoverflow.com/questions/5249224/controls-insist-on-being-too-large-and-wont-resize-in-qt-designer
-
-- para mudar o estilo de alguma coisa basta clicar com o botao direito no objeto e mudar o stylesheets
-
-- tem outras cenas mas nao me lembro

@@ -1,3 +1,0 @@
-It isolates the environment for Python projects so that each project can have its own dependencies.
-Its like a workspace where u have packages and python versions only in that folder, and u do this because
-some projects need some specific dependencies like python or packages versions to the programm work.

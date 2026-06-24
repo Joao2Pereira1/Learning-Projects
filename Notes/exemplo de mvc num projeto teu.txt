@@ -1,2 +1,0 @@
-um exemplo de mvc num projeto teu que está bem organizado é o projeto weather app, tens até um ficheiro
-de texto com estrutura mvc muito bem organizado

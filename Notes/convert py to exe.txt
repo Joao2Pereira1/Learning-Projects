@@ -1,1 +1,0 @@
-execute this command: python <filename> py2exe
