@@ -1,1 +1,5 @@
-/SportsWebApp/.venv
+.venv/
+Demos/
+Notes/
+__pycache__/
+*.pyc
