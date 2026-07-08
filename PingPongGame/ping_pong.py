@@ -8,7 +8,6 @@ Author: João Pereira
 import random
 import sys
 
-import pyaudio
 import pygame as py
 
 py.init()
