@@ -41,7 +41,7 @@ class MainWindowController(QMainWindow):
         self.ui.setupUi(self)
 
         # ? Gerir eventos
-        self.ui.LocalButton.clicked.connect(self.get_local_input)
+        self.ui.LocalButton.clicked.connect(self.retrieve_weather_data)
 
         # < Instancias das classes
         self.weather_service = WeatherService(api_key)
@@ -106,27 +106,19 @@ class MainWindowController(QMainWindow):
 
         if e.key() in (Qt.Key_Return, Qt.Key_Enter):
             print("enter/return")
-            local = self.get_local_input()
-            if local:
-                self.retrieve_weather_data(local)
+            self.retrieve_weather_data()
 
         # it calls the default behavior of QLineEdit (insert text etc.)
         QLineEdit.keyPressEvent(self.ui.LocalInput, e)
 
-    def get_local_input(self) -> None:
-        """
-        It will get the local input.
+    def retrieve_weather_data(self) -> None:
+        """It will receive the local input and then show the data at GUI.
         Local Input is the LineEdit responsible to get city or place.
         """
 
         # print("Botao clicado!")
 
         local = self.ui.LocalInput.text()
-        return local
-
-    def retrieve_weather_data(self, local) -> None:
-        """It will receive the local input and then show the data at GUI."""
-
         response = self.weather_service.fetch_forecast(local)
 
         if response == True:
