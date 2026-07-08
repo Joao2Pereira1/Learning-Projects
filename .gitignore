@@ -2,4 +2,5 @@
 Demos/
 Notes/
 WebImages/
-WeatherApp/credentials.txt
+WeatherApp/api_credentials.txt
+WeatherApp/.env
