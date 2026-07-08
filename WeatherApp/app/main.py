@@ -16,23 +16,24 @@ WINDOW_OPACITY = 0.95
 
 
 def create_window():
-    """ Create the main window and set its properties."""
-    
+    """Create the main window and set its properties."""
+
     window = MainWindowController()
     window.setWindowTitle("Weather Forecast")
     window.setWindowIcon(QIcon(ICON_FILE_PATH))
     window.setWindowOpacity(WINDOW_OPACITY)
     return window
 
+
 def run_application():
-    """ Run the application event loop."""
-    
+    """Run the application event loop."""
+
     app = QApplication(sys.argv)
 
     window = create_window()
     window.show()
     sys.exit(app.exec_())
 
+
 if __name__ == "__main__":
     run_application()
-

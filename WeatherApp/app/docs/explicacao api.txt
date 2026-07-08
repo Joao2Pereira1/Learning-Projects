@@ -15,17 +15,17 @@ Parameter		Description
 key	Required	API Key
 q	Required	Query parameter based on which data is sent back. It could be following:
 
--> Esses são parametros obrigatórios, em que key é a api key e q é a query, ou seja 
+-> Esses são parametros obrigatórios, em que key é a api key e q é a query, ou seja
 o tipo de consulta que estás a fazer a api saber que conteúdo devolver.
 
-Depois tens outros opcionais e tens um que é útil porque serve para obteres a previsao 
+Depois tens outros opcionais e tens um que é útil porque serve para obteres a previsao
 do tempo em x dias, que vão 1 a 14. Entao tens de passar days=5
 
-https://api.weatherapi.com/v1/forecast.json?key=a2e7082e845c48cfbb0123908250508&q=Lisboa&days=7&aqi=no&alerts=no
+https://api.weatherapi.com/v1/forecast.json?key=api_key&q=Lisboa&days=7&aqi=no&alerts=no
 
 key: api key; q: local que é Lisboa; aqi: é air quality; days: numero de dias na previsao; alerts: não é preciso
 
-Nota: podes fazer o tempo só para portugal, ou seja crias uma lista com as localidades de portugal, podem até ser 
+Nota: podes fazer o tempo só para portugal, ou seja crias uma lista com as localidades de portugal, podem até ser
 as principais e depois a pessoa escolhe por exemplo aveiro e tu escreves assim local = aveiro, e depois mudas na
 request f"...q={local}&days=7", e tambem podes deixar escolher o numero de dias
 

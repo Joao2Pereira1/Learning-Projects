@@ -1,1 +1,2 @@
 Sunny,app/icons/sunny.png
+Patchy rain nearby,app/icons/patchy_rain_nearby.png

@@ -3,7 +3,7 @@ Para aprender a fazer as requests à API de forma amigável usa: https://www.wea
 Exemplo:
 
 Request
-https://api.weatherapi.com/v1/current.json?key=a2e7082e845c48cfbb0123908250508&q=London&aqi=no
+https://api.weatherapi.com/v1/current.json?key={api_key}&q=London&aqi=no
 
 Response Code
 200
