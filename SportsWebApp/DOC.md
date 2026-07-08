@@ -1,65 +1,228 @@
-# Flask Application for Sports Registration
+# ⚽ Sports Registration Web Application
 
-This application allows users to register for sports and view a list of registrants.
+## Overview
 
-## Modules
+The **Sports Registration Web Application** is a web-based system developed with **Flask** that allows users to register for sports activities through a simple interface. Registration data is stored in a **MySQL** database, enabling users to browse all registrants or search for specific participants.
 
--   flask: framework for building web applications
--   logging: makes debugging easier
--   mysql.connector: manages data in a MySQL database
+The project demonstrates the integration of Flask routing, HTML templates, form validation, and relational database management.
 
-## Functions
+---
 
--   home: renders the home page
--   register: renders the registration page
--   about: renders the about page
--   register_done: handles registration form submissions
--   register_list: lists all registrants
--   search: lists all registrants with the name inserted
+# Features
 
-## Variables
+- Register participants for sports activities
+- Choose from a predefined list of sports
+- Store registrations in a MySQL database
+- Display all registered participants
+- Search participants by name
+- Validate user input before storing data
+- Informative pages (Home and About)
 
--   SPORTS: list of available sports
--   connection: connection to the MySQL database
--   db: cursor object for performing SQL operations
+---
 
-## API Endpoints
+# Technologies Used
 
-### GET /
+| Technology | Purpose |
+|------------|---------|
+| Python 3 | Backend logic |
+| Flask | Web framework |
+| MySQL | Data storage |
+| mysql-connector-python | MySQL database connector |
+| HTML | User interface |
+| Jinja2 | Dynamic page rendering |
+| Logging | Debugging and error tracking |
 
-The home page of the application. Renders the home.html template.
+---
 
-### GET /register
+# Available Sports
 
-The registration page of the application. Renders the register.html template.
+The application provides a predefined list of sports stored in the `SPORTS` variable.
 
-### POST /register
+Example:
 
-Handles the registration form submission. Validates the input data and inserts it into the database if valid. Renders the register_done.html template on success or register_failed.html template on failure.
+- Football
+- Basketball
+- Volleyball
+- Tennis
+- Swimming
 
-### GET /about
+---
 
-The about page of the application. Renders the about.html template.
+# Routes
 
-### GET /list
+## `GET /`
 
-Displays a list of all registrants. Retrieves the data from the database and renders the list.html template.
+Displays the application's home page.
 
-### POST /search
+**Template**
 
-Displays a list of the registrants with the name inserted. Retrieves the data from the database and renders the search.html template.
+- `home.html`
 
-## Database Schema
+---
 
-The application uses a MySQL database with a single table `registrants` in the `sport` database. The table has two columns:
+## `GET /register`
 
--   `name`: the name of the registrant
--   `sport`: the sport the registrant is registering for
+Displays the registration form.
 
-## Code Organization
+**Template**
 
-The code is organized into the following sections:
+- `register.html`
 
--   Routes: defines the API endpoints for the application
--   Database: defines the database schema and connections
--   Templates: defines the HTML templates for the application
+---
+
+## `POST /register`
+
+Processes the submitted registration form.
+
+### Responsibilities
+
+- Validates the participant's name
+- Validates the selected sport
+- Stores valid registrations in the database
+- Displays a success or failure page
+
+**Templates**
+
+- `register_done.html`
+- `register_failed.html`
+
+---
+
+## `GET /list`
+
+Retrieves every registered participant from the database.
+
+**Template**
+
+- `list.html`
+
+---
+
+## `POST /search`
+
+Searches for participants using the provided name.
+
+**Template**
+
+- `search.html`
+
+---
+
+## `GET /about`
+
+Displays information about the project.
+
+**Template**
+
+- `about.html`
+
+---
+
+# Main Functions
+
+| Function | Description |
+|----------|-------------|
+| `home()` | Renders the application's home page. |
+| `register()` | Displays the registration form. |
+| `register_done()` | Processes and validates registration requests. |
+| `register_list()` | Retrieves and displays all registrants. |
+| `search()` | Searches registrants by name. |
+| `about()` | Displays project information. |
+
+---
+
+# Database
+
+The application uses a **MySQL** database.
+
+## Database
+
+```text
+sport
+```
+
+## Table
+
+```text
+registrants
+```
+
+### Schema
+
+| Column | Type | Description |
+|---------|------|-------------|
+| `id` *(optional)* | INT | Primary key |
+| `name` | VARCHAR | Participant name |
+| `sport` | VARCHAR | Selected sport |
+
+---
+
+# Database Connection
+
+The application establishes a connection using `mysql.connector`.
+
+## Main Objects
+
+| Variable | Description |
+|----------|-------------|
+| `connection` | Connection object to the MySQL server |
+| `db` | Cursor used to execute SQL statements |
+
+---
+
+# Input Validation
+
+Before inserting data into the database, the application verifies that:
+
+- The participant's name is not empty.
+- The selected sport exists in the predefined sports list.
+- Invalid submissions are rejected.
+
+---
+
+# Error Handling
+
+The application includes basic error handling for:
+
+- Invalid form submissions
+- Database connection issues
+- SQL execution errors
+
+Logging is used to assist with debugging and monitoring application behavior.
+
+---
+
+# Requirements
+
+- Python 3.10+
+- Flask
+- mysql-connector-python
+- MySQL Server
+
+Install the required packages:
+
+```bash
+pip install flask mysql-connector-python
+```
+
+---
+
+# Running the Application
+
+Start the Flask server:
+
+```bash
+python app.py
+```
+
+Then open your browser and visit:
+
+```text
+http://localhost:5000
+```
+
+---
+
+# License
+
+This project is distributed under the MIT License.
