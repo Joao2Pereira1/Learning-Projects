@@ -1,0 +1,29 @@
+# TerminalApp QT Layout
+
+MainWindow (QMainWindow)
+│
+├── menubar (QMenuBar)
+│   ├── themeMenu (QMenu) "Themes"
+│   │   ├── actionMatrixGreen (QAction)
+│   │   ├── actionClassicWhite (QAction)
+│   │   └── actionDraculaPurple (QAction)
+│   │
+│   └── fontMenu (QMenu) "Font Size"
+│       ├── actionFontSmall (QAction)
+│       ├── actionFontNormal (QAction)
+│       └── actionFontLarge (QAction)
+│
+└── centralwidget (QWidget)
+    │
+    └── mainLayout (QVBoxLayout)
+        │
+        ├── plainTextEdit (QPlainTextEdit)
+        │   # Terminal Output Display
+        │   # Read-only, Monospace Font, Custom Scrollbars
+        │
+        ├── inputLayout (QHBoxLayout)
+        │   ├── promptLabel (QLabel) -> ">"
+        │   ├── lineEdit (QLineEdit) -> Command Input Area
+        │   └── pushButton (QPushButton) -> "Send/Execute"
+        │
+        └── currentDirLabel (QLabel) -> "Current directory: [PATH]"

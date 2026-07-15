@@ -16,7 +16,7 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="windowTitle">
+  <property name="windowforecastTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
@@ -35,7 +35,7 @@ background-color: #E0F7FA;  /* azul clarinho */
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="LocalLabel">
+       <widget class="QLabel" name="locationLabel">
         <property name="font">
          <font>
           <family>Segoe UI</family>
@@ -53,7 +53,7 @@ color: #333;</string>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="LocalInput">
+       <widget class="QLineEdit" name="locationInput">
         <property name="styleSheet">
          <string notr="true">background-color: #FFFFFF;
     border: 1px solid #AAAAAA;
@@ -116,7 +116,7 @@ padding: 4px;</string>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <property name="title">
+      <property name="forecastTitle">
        <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -521,7 +521,7 @@ padding: 4px;</string>
         </layout>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="Title">
+        <widget class="QLabel" name="forecastTitle">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -697,18 +697,18 @@ padding: 4px;</string>
      <height>27</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuClima">
-    <property name="title">
+   <widget class="QMenu" name="weatherMenu">
+    <property name="forecastTitle">
      <string>Clima</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuAcerca_de">
-    <property name="title">
+   <widget class="QMenu" name="helpMenu">
+    <property name="forecastTitle">
      <string>Acerca de</string>
     </property>
    </widget>
-   <addaction name="menuClima"/>
-   <addaction name="menuAcerca_de"/>
+   <addaction name="weatherMenu"/>
+   <addaction name="helpMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

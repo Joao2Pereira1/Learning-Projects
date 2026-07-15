@@ -1,0 +1,34 @@
+# File Tree: TerminalApp
+
+app/
+│
+├── controller/
+│   └── main_window_controller.py   # Controls logical flow, catches KeyEvents and handles CLI inputs
+│
+├── ui/
+│   ├── my_gui.py                   # UI class generated from Qt Designer (pyuic5)
+│   └── my_gui.ui                   # Raw XML UI design file from Qt Designer
+│
+├── styles/
+│   └── styles.qss                  # Base stylesheet configuration
+│
+├── utils/
+│   ├── commands.py                 # Registry of CLI system commands mapping triggers to execution functions
+│   ├── settings_handler.py         # Save/Load persistent configurations & history to JSON
+│   ├── utilities.py                # Command logic (helper, list_files, about, clear, current_dir)
+│   └── valid_args.py               # Argument validation routines
+│
+├── data/
+│   ├── terminal_settings.json      # Persistent JSON storage (saves themes, font size and command history)
+│   └── task_list.txt               # Data files managed by filesystem commands
+│
+├── resources/
+│   └── icons/
+│       └── flash.jpg            # Application main window icon
+│
+├── docs/
+│   ├── layout_qt.md                # QT Designer component hierarchy chart
+│   └── file_structure.md           # Project folder structure & tree architecture
+│
+├── main.py                         # Application entrypoint (Initializes QApplication, loads styling and runs window)
+└── requirements.txt                # Package dependencies (PyQt5, etc.)

@@ -9,7 +9,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(900, 480)
         MainWindow.setMinimumSize(QtCore.QSize(850, 450))
 
-        # Estilo injetado no a partir do ficheiro python em vez de file.qss
+        # Estilo injetado a partir do ficheiro python em vez de file.qss
         MainWindow.setStyleSheet("""
             QMainWindow {
                 background-color: #F4F6F9;
@@ -45,12 +45,12 @@ class Ui_MainWindow(object):
             QPushButton:pressed {
                 background-color: #1D4ED8;
             }
-            QLabel#LocalLabel {
+            QLabel#locationLabel {
                 font-size: 18px;
                 font-weight: bold;
                 color: #1E293B;
             }
-            QLabel#LocalInfo {
+            QLabel#locationInfoLabel {
                 background-color: #E2E8F0;
                 border-radius: 6px;
                 padding: 8px;
@@ -103,33 +103,33 @@ class Ui_MainWindow(object):
         self.searchLayout = QtWidgets.QHBoxLayout()
         self.searchLayout.setSpacing(10)
 
-        self.LocalLabel = QtWidgets.QLabel(self.centralwidget)
-        self.LocalLabel.setObjectName("LocalLabel")
-        self.searchLayout.addWidget(self.LocalLabel)
+        self.locationLabel = QtWidgets.QLabel(self.centralwidget)
+        self.locationLabel.setObjectName("locationLabel")
+        self.searchLayout.addWidget(self.locationLabel)
 
-        self.LocalInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.LocalInput.setPlaceholderText("Digite a cidade (ex: Lisboa, London)...")
-        self.searchLayout.addWidget(self.LocalInput)
+        self.locationInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.locationInput.setPlaceholderText("Digite a cidade (ex: Lisboa, London)...")
+        self.searchLayout.addWidget(self.locationInput)
 
-        self.LocalButton = QtWidgets.QPushButton(self.centralwidget)
-        self.LocalButton.setObjectName("LocalButton")
-        self.searchLayout.addWidget(self.LocalButton)
+        self.searchButton = QtWidgets.QPushButton(self.centralwidget)
+        self.searchButton.setObjectName("searchButton")
+        self.searchLayout.addWidget(self.searchButton)
 
         self.mainLayout.addLayout(self.searchLayout)
 
         # Zona Intermédia: Informaçoes extras do local ativo
-        self.LocalInfo = QtWidgets.QLabel(self.centralwidget)
-        self.LocalInfo.setObjectName("LocalInfo")
-        self.LocalInfo.setWordWrap(True)
-        self.mainLayout.addWidget(self.LocalInfo)
+        self.locationInfoLabel = QtWidgets.QLabel(self.centralwidget)
+        self.locationInfoLabel.setObjectName("locationInfoLabel")
+        self.locationInfoLabel.setWordWrap(True)
+        self.mainLayout.addWidget(self.locationInfoLabel)
 
         # Zona Inferior: Título e Grid da Previsão Semanal
-        self.Title = QtWidgets.QLabel(self.centralwidget)
+        self.forecastTitle = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
-        self.Title.setFont(font)
-        self.mainLayout.addWidget(self.Title)
+        self.forecastTitle.setFont(font)
+        self.mainLayout.addWidget(self.forecastTitle)
 
         # Container dos Cards
         self.weekLayout = QtWidgets.QHBoxLayout()
@@ -176,7 +176,7 @@ class Ui_MainWindow(object):
 
             self.weekLayout.addWidget(card)
 
-            # Guardando referências dinamicas no objeto para controle posterior via API
+            # Guardar referências dinamicas no objeto para controle posterior via API
             setattr(self, f"day_{i}", lbl_day)
             setattr(self, f"icon_{i}", lbl_icon)
             setattr(self, f"temperature_{i}", lbl_temp)
@@ -187,17 +187,35 @@ class Ui_MainWindow(object):
         # Menubar e Statusbar
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 900, 25))
-        self.menuClima = QtWidgets.QMenu(self.menubar)
-        self.menuClima.setObjectName("menuClima")
-        self.menuAcerca_de = QtWidgets.QMenu(self.menubar)
-        self.menuAcerca_de.setObjectName("menuAcerca_de")
+        self.weatherMenu = QtWidgets.QMenu(self.menubar)
+        self.weatherMenu.setObjectName("weatherMenu")
+        self.helpMenu = QtWidgets.QMenu(self.menubar)
+        self.helpMenu.setObjectName("helpMenu")
         MainWindow.setMenuBar(self.menubar)
+
+        # Opções para weather Menu (Refresh,Current location,Exit)
+        self.actionRefresh = QtWidgets.QAction(MainWindow)
+        self.actionCurrentLocation = QtWidgets.QAction(MainWindow)
+        self.actionExit = QtWidgets.QAction(MainWindow)
+
+        self.weatherMenu.addAction(self.actionRefresh)
+        self.weatherMenu.addAction(self.actionCurrentLocation)
+        self.weatherMenu.addSeparator()
+        self.weatherMenu.addAction(self.actionExit)
+
+        # Opções para help Menu (Help,About)
+        self.actionHelp = QtWidgets.QAction(MainWindow)
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+
+        self.helpMenu.addAction(self.actionHelp)
+        self.helpMenu.addAction(self.actionAbout)
+
+        # Adicionar o weather menu e about menu à aplicacao
+        self.menubar.addAction(self.weatherMenu.menuAction())
+        self.menubar.addAction(self.helpMenu.menuAction())
 
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
-
-        self.menubar.addAction(self.menuClima.menuAction())
-        self.menubar.addAction(self.menuAcerca_de.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -205,14 +223,24 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Previsão do Tempo"))
-        self.LocalLabel.setText(_translate("MainWindow", "Localização"))
-        self.LocalButton.setText(_translate("MainWindow", "Procurar"))
-        self.LocalInfo.setText(
+        self.locationLabel.setText(_translate("MainWindow", "Localização"))
+        self.searchButton.setText(_translate("MainWindow", "Procurar"))
+        self.locationInfoLabel.setText(
             _translate(
                 "MainWindow",
                 "Aguardando pesquisa de localização... Aqui aparecerão coordenadas e vento.",
             )
         )
-        self.Title.setText(_translate("MainWindow", "Previsão para a semana"))
-        self.menuClima.setTitle(_translate("MainWindow", "Clima"))
-        self.menuAcerca_de.setTitle(_translate("MainWindow", "Acerca de"))
+        self.forecastTitle.setText(_translate("MainWindow", "Previsão para a semana"))
+
+        self.weatherMenu.setTitle(_translate("MainWindow", "Clima"))
+        self.helpMenu.setTitle(_translate("MainWindow", "Ajuda"))
+
+        self.actionRefresh.setText(_translate("MainWindow", "Atualizar"))
+        self.actionCurrentLocation.setText(
+            _translate("MainWindow", "Localização Atual")
+        )
+        self.actionExit.setText(_translate("MainWindow", "Sair"))
+
+        self.actionHelp.setText(_translate("MainWindow", "Ajuda"))
+        self.actionAbout.setText(_translate("MainWindow", "Acerca de"))

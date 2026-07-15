@@ -1,27 +1,119 @@
-QPlainTextEdit {
-    color: #000; /* light grey text color */
-    font-size: 20px;
-    font-family: Open Sans;
-    border: 2px solid #333; /* darker grey border */
-    border-radius: 5px;
+/* Janela Principal */
+QMainWindow {
+    background-color: #1e1e24;
+}
+
+/* Área de Texto do Terminal (Onde o output dos comandos aparece) */
+QTextEdit, QPlainTextEdit {
+    background-color: #121214;
+    color: #cbd5e1; /* Branco acinzentado suave */
+    font-family: "Consolas", "Fira Code", "Courier New", monospace;
+    font-size: 18px;
+    border: 2px solid #005544;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Cor da seleção de texto para ambos */
+QTextEdit::selection, QPlainTextEdit::selection {
+    background-color: #005544;
+    color: #00ffcc;
+}
+
+/* Campo de Entrada de Texto */
+QLineEdit {
+    background-color: #1a1a1e;
+    color: #00ffcc;
+    font-family: "Consolas", "Fira Code", monospace;
+    font-size: 16px;
+    border: 2px solid #2a2a30;
+    border-radius: 6px;
+    padding: 8px;
+    selection-background-color: #005544;
+}
+
+QLineEdit {
+    background-color: #1a1a1e;
+    color: #00ffcc;
+    font-family: "Consolas", "Fira Code", monospace;
+    font-size: 16px;
+    border: 2px solid #2a2a30;
+    border-radius: 6px;
+    padding: 8px;
+    selection-background-color: #005544;
+}
+
+QLineEdit:focus {
+    border: 2px solid #00ffcc; /* Brilho neon quando focado */
 }
 
 QPushButton {
-    background-color: #333; /* dark grey background */
-    color: #ccc; /* light grey text color */
-    font-size: 17px;
-    font-family: Open Sans;
-    border: 2px solid #444; /* darker grey border */
-    border-radius: 8px;
-    padding: 10px 15px;
+    background-color: #2a2a30;
+    color: #e0e0e6;
+    border: 1px solid #3a3a42;
+    border-radius: 6px;
+    padding: 8px 15px;
+    font-weight: bold;
 }
 
 QPushButton:hover {
-    background-color: #444; /* darker grey hover state */
+    background-color: #00ffcc;
+    color: #121214;
+}
+
+QPushButton:pressed {
+    background-color: #00ccaa;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background-color: #121214;
+    width: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #2a2a30;
+    min-height: 20px;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #00ffcc;
+}
+
+QScrollBar::handle:vertical:pressed {
+    background-color: #00ccaa;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+    background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
 }
 
 QLabel {
-    color: #000; /* light grey text color */
+    color: #a0a0aa;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     font-size: 18px;
-    font-family: Open Sans;
+    background: transparent;
+    padding: 2px;
+}
+
+QLabel.terminal-title {
+    color: #00ffcc; /* Ciano Neon */
+    font-family: "Consolas", "Fira Code", monospace;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* QLabel para indicar o caminho atual */
+QLabel#prompt_label {
+    color: #ff007f;
+    font-family: "Consolas", monospace;
+    font-weight: bold;
 }

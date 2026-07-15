@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QApplication
 
 # * Constants
 STYLE_SHEET_FILE = "./app/styles/styles.qss"
-ICON_FILE = "./icons/lighting.jpg"
+ICON_FILE = "./app/icons/lighting.jpg"
 WINDOW_OPACITY = 0.95
 
 
@@ -29,6 +29,7 @@ def load_style_sheet() -> str:
         logging.error(f"Error: Could not load stylesheet. {e}")
         return "Error"
 
+
 def set_up_window_properties(window: MainWindowController) -> None:
     """
     Set up the properties of the main window.
@@ -40,7 +41,9 @@ def set_up_window_properties(window: MainWindowController) -> None:
     window.setWindowIcon(QIcon(ICON_FILE))
     window.setWindowOpacity(WINDOW_OPACITY)
 
+
 # < RUNNING
+
 
 def main():
     """

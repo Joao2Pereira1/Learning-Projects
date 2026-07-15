@@ -8,6 +8,7 @@ and managing signals and slots for the main application window.
 
 from typing import List
 
+from utils.get_current_location import get_current_location
 from model.weather_data import WeatherData
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QKeyEvent, QMouseEvent, QPixmap
@@ -41,19 +42,25 @@ class MainWindowController(QMainWindow):
         self.ui.setupUi(self)
 
         # ? Gerir eventos
-        self.ui.LocalButton.clicked.connect(self.retrieve_weather_data)
+        self.ui.searchButton.clicked.connect(self.retrieve_weather_data)
 
         # < Instancias das classes
         self.weather_service = WeatherService(api_key)
         self.icons_manager = IconsManager()
 
-        # add action to menu acerca to show some info
-        self.info_action = self.ui.menuAcerca_de.addAction("Sobre")
-        self.info_action.triggered.connect(self.sobre_pressed)
+        # ! Funções para cada opcao na menubar Menu Clima e Acerca de
 
-        # overrides the default keyPressEvent method of LocalInput to the
-        # new method self.key_press_event and receives the same arg QKeyEvent -> e
-        self.ui.LocalInput.keyPressEvent = self.key_press_event
+        # Menu Clima
+        self.ui.actionRefresh.triggered.connect(self.refresh_pressed)
+        self.ui.actionCurrentLocation.triggered.connect(self.current_location_pressed)
+        self.ui.actionExit.triggered.connect(self.close)
+
+        # Menu Acerca de
+        self.ui.actionHelp.triggered.connect(self.help_pressed)
+        self.ui.actionAbout.triggered.connect(self.about_pressed)
+
+        # When pressing return key, retrieve data
+        self.ui.locationInput.returnPressed.connect(self.retrieve_weather_data)
 
         # objetos da ui
         self.days: List[QLabel] = [
@@ -84,32 +91,44 @@ class MainWindowController(QMainWindow):
             self.ui.temperature_7,
         ]
 
-    def sobre_pressed(self):
+    # Functions for each item in menubar Clima de refresh, currentLocation e exit
+
+    def refresh_pressed(self):
+        """Updates weather data, by using the local inserted."""
+
+        self.retrieve_weather_data()
+
+    def current_location_pressed(self):
+        """Get current location and retrieves weather data for the location obtained."""
+
+        city = get_current_location()
+
+        if city:
+            self.ui.locationInput.setText(city)
+            self.retrieve_weather_data()
+        else:
+            QMessageBox.warning(
+                self, "Erro", "Não foi possível obter a localização atual."
+            )
+
+    def exit_pressed(self):
+        self.close()
+
+    # Functions for each item in menubar Acerca de help e about
+
+    def help_pressed(self):
+        message = QMessageBox(self)
+        message.setText(
+            "Para ajuda verifique a documentação ou entre em contacto: https://github.com/Joao2Pereira1/Learning-Projects/tree/main/WeatherApp"
+        )
+        message.exec()
+
+    def about_pressed(self):
         message = QMessageBox(self)
         message.setText(
             "Isto é uma simples aplicação que mostra a previsão do clima nos próximos 7 dias."
         )
         message.exec()
-
-    def key_press_event(self, e: QKeyEvent) -> None:
-        """
-        Responsible to when the user presses key return, it calls
-        the function get_local_input().
-
-        Args:
-            e (QKeyEvent): a keyboard event
-        """
-
-        print(type(e))  # class 'PyQt5.QtGui.QKeyEvent'>
-        print(e.key())  # key code
-        print("event", e)
-
-        if e.key() in (Qt.Key_Return, Qt.Key_Enter):
-            print("enter/return")
-            self.retrieve_weather_data()
-
-        # it calls the default behavior of QLineEdit (insert text etc.)
-        QLineEdit.keyPressEvent(self.ui.LocalInput, e)
 
     def retrieve_weather_data(self) -> None:
         """It will receive the local input and then show the data at GUI.
@@ -118,12 +137,12 @@ class MainWindowController(QMainWindow):
 
         # print("Botao clicado!")
 
-        local = self.ui.LocalInput.text()
+        local = self.ui.locationInput.text()
         response = self.weather_service.fetch_forecast(local)
 
-        if response == True:
+        if response:
             location_data = self.weather_service.get_location_info()
-            self.ui.LocalInfo.setText(str(location_data))
+            self.ui.locationInfoLabel.setText(str(location_data))
 
             # returns a tuple(current day, dictionary with weather data for each day)
             current_day, forecast = self.weather_service.get_forecast()
@@ -155,5 +174,5 @@ class MainWindowController(QMainWindow):
             alert = QMessageBox(self)
             alert.setText("Local inserido inválido.")
             alert.exec()
-            self.ui.LocalInput.setText("")
+            self.ui.locationInput.setText("")
             print("Local inserido inválido.")

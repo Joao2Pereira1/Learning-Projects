@@ -17,4 +17,5 @@ def get_temperature(local) -> float:
         print("Error")
 
 
-get_temperature("Salreu")
+if __name__ == "__main__":
+    get_temperature("Salreu")

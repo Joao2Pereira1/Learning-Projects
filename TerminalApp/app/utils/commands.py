@@ -3,6 +3,7 @@ from typing import Callable, Dict, List
 from utils.file_methods import File  # Methods for file handling
 from utils.folder_methods import Folder  # Methods for folder handling
 from utils.utilities import Util  # Extra methods ex: about, help, list
+from utils.search_methods import find_files, grep_text  # Methods for grep and find
 
 # < commands
 # Each key  represents a command that the user can input, and the
@@ -24,4 +25,6 @@ COMMANDS: Dict[str, Callable] = {
     "help": Util.helper,
     "about": Util.about,
     "clear": Util.clear,
+    "find": find_files,
+    "grep": grep_text,
 }

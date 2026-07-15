@@ -1,111 +1,167 @@
-# 📂 File and Directory Management Program
+# ⚡ Flash Terminal
 
-## Overview
+A desktop application built in **Python** with **PyQt5**, simulating an interactive terminal interface for safe and advanced local file system navigation. The project follows strict Model-View-Controller (MVC) architecture, implements a dynamic runtime style engine, features system command autocompletion, and serializes user session preferences via a persistent JSON database.
 
-This program provides an interactive command-line interface (CLI) for managing files and directories on your system. It simplifies common file system tasks by allowing users to create, read, write, rename, and delete both files and directories, track sizes, change working directories, and inspect contents.
+## Overview & Functionality
 
----
+This application is a practical desktop system utility designed to test raw command-line text parsing, runtime stylesheet injection, interactive keyboard event monitoring, and dynamic persistent configurations in a graphical environment.
 
-## Commands
+- **Core Feature:** The user inputs text expressions into a terminal line. Upon submission, the app splits and lowercases tokens to match safe backend actions, rendering output blocks in real time.
 
-To use the program, type the command followed by any required arguments.
+- **Persistent Sessions:** User preferences (background color, text hex codes, and font scaling parameters) are kept safe across application restarts along with a continuous keyboard command history buffer.
 
-### Usage Example
+- **Data Optimization:** Commands are evaluated using individual argument validation loops inside the controller flow rather than generic global catchers. This ensures complex instructions containing multi-token strings remain fully intact.
 
-To create a new text file:
+## User Interface (Qt)
 
-```bash
-mk example.txt
+The graphical user interface was initially designed visually using **Qt Designer** and subsequently customized through code adjustments.
+
+### Interface Architecture (Main Window)
+
+```
+MainWindow
+│
+├── menubar (Top Menu)
+│   ├── themeMenu (Themes)
+│   │   ├── actionMatrixGreen
+│   │   ├── actionClassicWhite
+│   │   └── actionDraculaPurple
+│   │
+│   └── fontMenu (Font Size)
+│       ├── actionFontSmall
+│       ├── actionFontNormal
+│       └── actionFontLarge
+│
+└── centralwidget
+    └── mainLayout (Vertical Alignment)
+         │
+         ├── plainTextEdit (Terminal Output Display Box)
+         │
+         ├── inputLayout (Horizontal Line Alignment)
+         │   ├── promptLabel (Displays ">")
+         │   ├── lineEdit (Text Input Area)
+         │   └── pushButton (Send/Execute Trigger)
+         │
+         └── currentDirLabel (Status Bar displaying: "Current directory: [PATH]")
 ```
 
-### Supported CLI Commands
+### Key UI Workflows
 
-| Command | Action | Example Syntax |
-|---------|--------|----------------|
-| `mk` | Create a new file | `mk file.py` |
-| `read` | Read the contents of a file | `read filename` |
-| `write` | Append text to a file (opens a text input box) | `write filename` |
-| `rewrite` | Overwrite the contents of a file (opens a text input box) | `rewrite filename` |
-| `delete` | Delete a file | `delete filename` |
-| `rename` | Rename a file (opens a text input box for the new name) | `rename filename` |
-| `size` | Display the size of a file | `size filename` |
-| `mkdir` | Create a new directory | `mkdir dirname` |
-| `deletedir` | Delete a directory | `deletedir dirname` |
-| `renamedir` | Rename a directory (opens a text input box for the new name) | `renamedir dirname` |
-| `dirsize` | Display the total size of a directory | `dirsize dirname` |
-| `change` | Change the current working directory | `change dirname` |
-| `list` | List all files in the current directory | `list` |
-| `help` | Display manual and help information | `help` |
-| `about` | Display metadata and information about the program | `about` |
-| `clear` | Clear the command-line interface screen | `clear` |
+- **Command Submission:** The user types an instruction into `lineEdit` and presses *Enter* or clicks `pushButton`. This clears the input area, records the sequence into the historical stack, and echoes the query out into `plainTextEdit`.
 
----
+- **Keyboard Event Filtering:** Intercepts native application window keypress events. Pushing **ArrowUp** or **ArrowDown** navigates backward and forward through previous command memories. Pushing **Tab** matches strings against known registers using a case-insensitive `QCompleter`.
 
-## Technical Functions
+- **Input Drafting Cache:** If the user drafts an incomplete text string and browses history using directional keys, the program buffers that uncommitted draft into a memory cache, restoring it safely if the user backtracks.
 
-The CLI translates user inputs directly into the following backend functions.
+- **Dynamic QSS Overwrites:** Customization actions unpolish existing graphical widgets, apply modified CSS strings containing user color choices, and perform hard refreshes to override active skins seamlessly.
 
-### File Management (`FileMethods` Module)
+## Project Structure
 
-| Function | Description |
-|----------|-------------|
-| `file.create(name)` | Creates a new file with the given name. |
-| `file.read(name)` | Reads and outputs the text contents of the specified file. |
-| `file.write(name, contents)` | Appends the provided content to the specified file. |
-| `file.rewrite(name, contents)` | Replaces the existing file content with the new text. |
-| `file.type(name)` | Analyzes and displays the file extension/type. |
-| `file.delete(name)` | Permanently removes the specified file. |
-| `file.rename(name, new_name)` | Renames the specified file. |
-| `file.size(name)` | Calculates and displays the file size. |
+The folder and file organization follows the **MVC (Model-View-Controller)** pattern to decouple business logic, interface, and data-consuming services.
 
-### Folder Management (`FolderMethods` Module)
-
-| Function | Description |
-|----------|-------------|
-| `folder.create(name)` | Creates a new directory. |
-| `folder.delete(name)` | Deletes the specified directory. |
-| `folder.rename(name, new_name)` | Renames the specified directory. |
-| `folder.size(name)` | Calculates the total size of the directory. |
-| `folder.change(name)` | Changes the current working directory. |
-
-### Core Utilities (`utilities` Module)
-
-| Function | Description |
-|----------|-------------|
-| `util.list_files()` | Lists the contents of the current directory. |
-| `util.helper()` | Displays the help menu. |
-| `util.about()` | Displays application metadata and build information. |
-
----
-
-## System Requirements
-
-Ensure your environment includes:
-
-- Python 3.x
-- `os` module (Python standard library)
-- `utilities` module (included in the project)
-- `FileMethods` module (included in the project)
-- `FolderMethods` module (included in the project)
-
----
-
-## Installation & Execution
-
-1. Copy the following files into the same directory:
-   - `main.py`
-   - `utilities.py`
-   - `FileMethods.py`
-   - `FolderMethods.py`
-
-2. Run the application:
-
-```bash
-python main.py
+```
+app/
+│
+├── controller/
+│   └── main_window_controller.py   # Connects the UI to utilities, manages event loops, key filters, and style updates
+│
+├── styles/
+│   └── styles.qss                  # Application baseline cascading stylesheet rules
+│
+├── ui/
+│   ├── my_gui.py                   # Interface layout code compiled from Qt Designer (pyuic5)
+│   └── my_gui.ui                   # Qt Designer visual workspace blueprint XML file
+│
+├── utils/
+│   ├── commands.py                 # Mapping dictionary linking terminal token verbs to back-end execution scripts
+│   ├── settings_handler.py         # Encapsulates file operations to save/load history arrays and theme details
+│   └── utilities.py                # Functional core for core commands (list, about, clear, help)
+│
+├── data/                            # Folder reserved for system data storage and state outputs
+│   ├── terminal_settings.json      # Serialized data configuration file for skin configurations and logs
+│   └── task_list.txt               # Content files modified dynamically by system file routines
+│
+├── resources/
+│   └── icons/
+│       └── lighting.jpg            # Main operating system window application icon
+│
+├── docs/
+│   ├── layout_qt.md                # Visual components structural alignment map
+│   └── file_structure.md           # Complete overview of project file architecture and boundaries
+│
+├── main.py                         # Application entry point that handles boot paths and triggers the event loop
+└── requirements.txt                # Project python dependencies index
 ```
 
----
+### Available Commands
 
-## License
+| **Command Trigger** | **Target Object** | **Action Performed**                                | **Example Syntax**     |
+| ------------------- | ----------------- | --------------------------------------------------- | ---------------------- |
+| `mk`                | File              | Creates a brand new file                            | `mk script.py`         |
+| `read`              | File              | Outputs text lines from a target file               | `read index.html`      |
+| `write`             | File              | Appends message text to a file via popup box        | `write logs.txt`       |
+| `rewrite`           | File              | Destroys file text and writes new input via popup   | `rewrite logs.txt`     |
+| `delete`            | File              | Erases a file target permanently from path          | `delete temp.csv`      |
+| `rename`            | File              | Changes target filename via input popup dialog      | `rename main.py`       |
+| `size`              | File              | Displays total storage block weight in bytes        | `size asset.png`       |
+| `mkdir`             | Directory         | Spins up a new directory structure                  | `mkdir assets`         |
+| `deletedir`         | Directory         | Erases a folder node from the system path           | `deletedir old_build`  |
+| `renamedir`         | Directory         | Alters a directory label via input popup dialog     | `renamedir old_assets` |
+| `dirsize`           | Directory         | Computes combined weight of all internal files      | `dirsize media`        |
+| `change`            | Directory         | Pivots operational working workspace paths          | `change templates`     |
+| `find`              | Search            | Crawls the path trees looking for string matches    | `find .qss`            |
+| `grep`              | Search            | Parses internal lines looking for character matches | `grep app.log "Error"` |
+| `set color`         | Interface         | Injects runtime Hex values onto typography layers   | `set color #00ffcc`    |
+| `set font`          | Interface         | Updates pixel dimensions on the terminal font face  | `set font 14`          |
 
-This project is open-source and distributed under the **MIT License**. See the `LICENSE` file for complete licensing information.
+#### Configuration Management (JSON Store Cache)
+
+To guarantee that cosmetic setups and shell operations stay active between separate software launches, the system includes an absolute storage handler (`settings_handler`).
+
+- **The Problem:** Relocating deep path structures using the `change` command causes file write actions using path symbols like `./` to drop files into the newly focused directory, leading to data loss and multiple duplicate configuration sheets.
+
+- **The Solution (`settings_handler`):**
+  
+  1. Resolves coordinates down to the root script file location using `os.path.abspath(__file__)`.
+  
+  2. Anchors tracking definitions down to a permanent space under `app/data/`.
+  
+  3. **Read Cycle:** At launch, it reads `terminal_settings.json` to configure variables before components are painted onto the monitor layout.
+  
+  4. **Write Cycle:** Captures text modifications from inputs or click events from top menu bars, writing arrays back to the central secure file coordinates instantly.
+
+## Requirements & Setup
+
+### System Requirements
+
+- **Python:** >= 3.8 (Utilizes absolute path resolution wrappers and native typing features.)
+
+### Installing Dependencies
+
+Project dependencies are declared in `requirements.txt`:
+
+Plaintext
+
+```
+PyQt5
+```
+
+Install all required application dependencies with:
+
+Bash
+
+```
+pip install -r requirements.txt
+```
+
+## How to Run the Project
+
+1. **Verify Asset Directories:** Ensure the required structure is intact, noting that data stores like `app/data/` will automatically instantiate upon running the entry file if missing.
+
+2. **Launch the Core Shell Loop:** Execute the absolute application entry point from your terminal interface:
+   
+   Bash
+   
+   ```
+   python app/main.py
+   ```

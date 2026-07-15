@@ -16,7 +16,6 @@ The application focuses on simplicity and usability, providing an intuitive inte
 - Restore tasks from the previous session
 - Clear the entire task list
 - Keyboard shortcuts for common actions
-- Welcome dialog requesting the user's name
 - Simple and responsive PyQt5 graphical interface
 
 ---
@@ -34,12 +33,12 @@ The application focuses on simplicity and usability, providing an intuitive inte
 
 # Technologies Used
 
-| Technology | Purpose |
-|------------|---------|
-| Python 3 | Application logic |
-| PyQt5 | Graphical User Interface |
-| Text File Storage | Persistent task storage |
-| Qt Designer | User interface design (if applicable) |
+| Technology        | Purpose                               |
+| ----------------- | ------------------------------------- |
+| Python 3          | Application logic                     |
+| PyQt5             | Graphical User Interface              |
+| Text File Storage | Persistent task storage               |
+| Qt Designer       | User interface design (if applicable) |
 
 ---
 
@@ -59,11 +58,11 @@ Each task is written to the file so that it can be restored when the application
 
 Provides keyboard shortcuts for common operations.
 
-| Shortcut | Action |
-|----------|--------|
-| Ctrl + S | Save tasks |
-| Ctrl + L *(or your shortcut)* | Clear task list |
-| Ctrl + Q | Exit application |
+| Shortcut                      | Action           |
+| ----------------------------- | ---------------- |
+| Ctrl + S                      | Save tasks       |
+| Ctrl + L _(or your shortcut)_ | Clear task list  |
+| Ctrl + Q                      | Exit application |
 
 ---
 

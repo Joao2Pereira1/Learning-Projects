@@ -2,12 +2,11 @@
 
 from PyQt5.QtWidgets import QMainWindow
 
-from app.model.todo_list import TodoList  # data list
-from app.model.todo_list_file_handler import \
-    TodoListFileHandler  # file operations
-from app.ui.my_gui import Ui_MainWindow  # UI design for the application
-from app.utils.shortcuts import Shortcuts  # app shortcuts
-from app.view.todo_list_view import ToDoListView  # display tasks text
+from model.todo_list import TodoList  # data list
+from model.todo_list_file_handler import TodoListFileHandler  # file operations
+from ui.my_gui import Ui_MainWindow  # UI design for the application
+from utils.shortcuts import Shortcuts  # app shortcuts
+from view.todo_list_view import ToDoListView  # display tasks text
 
 # < CONTROLLER
 

@@ -1,0 +1,22 @@
+MainWindow
+│
+├── menubar
+│   └── helpMenu
+│       ├── actionHelp
+│       └── actionAbout
+│
+├── statusbar
+│
+└── centralwidget
+    │
+    └── mainLayout (QVBoxLayout)
+        │
+        ├── titleLabel (QLabel)
+        │
+        ├── taskList (QListWidget)
+        │
+        └── inputLayout (QHBoxLayout)
+            │
+            ├── taskInput (QLineEdit)
+            │
+            └── addButton (QPushButton)

@@ -6,8 +6,7 @@ Icons are cached locally to avoid repeated network requests, improving performan
 and reducing unnecessary API calls.
 """
 
-import os
-
+import pathlib
 import requests  # type: ignore
 
 
@@ -19,14 +18,21 @@ class IconsManager:
     -> Basically it serves as cache to improve performance.
     """
 
-    def __init__(self, folder_path: str = "app/icons", dict_path: str = "app/model/icons_dict.txt"):
-        self.icons_folder = folder_path
-        self.dict_path = dict_path
-        os.makedirs(self.icons_folder, exist_ok=True)
+    def __init__(
+        self,
+        folder_path: str = "icons",
+        dict_path: str = "icons_dict.txt",
+    ):
+        base_path = pathlib.Path(__file__).resolve().parent.parent
+
+        self.icons_folder = base_path / folder_path
+        self.dict_path = base_path / dict_path
+
+        self.icons_folder.mkdir(parents=True, exist_ok=True)
+
         self.weather_icons = self.load_dict()
 
-
-    def load_dict(self)-> dict | str:
+    def load_dict(self) -> dict:
         """
         Loads dictionary from the file, because when the program
         resets, it looses the dictionary data.
@@ -37,17 +43,26 @@ class IconsManager:
 
         weather_icons = {}
 
-        if not os.path.exists(self.dict_path):
+        if not self.dict_path.exists():
+            return weather_icons
+
+        try:
+            with open(self.dict_path, "r", encoding="utf-8") as file:
+                for line in file:
+                    line = line.strip()
+
+                    if not line:
+                        continue
+
+                    icon, path = line.split(",", 1)
+                    weather_icons[icon] = path
+
+        except (OSError, ValueError):
             return {}
 
-        with open(self.dict_path, "r", encoding="utf-8") as f:
-            for line in f:
-                icon, path = line.strip().split(",", 1)
-                weather_icons[icon] = path
         return weather_icons
 
-
-    def save_dict(self) -> str:
+    def save_dict(self) -> bool | str:
         """
         Saves dictionary: dict{"sunny":"icons/sunny.png"}.
 
@@ -56,9 +71,9 @@ class IconsManager:
         """
 
         try:
-            with open(self.dict_path,"w", encoding="utf-8") as f:
-                for icon,path in self.weather_icons.items():
-                    f.write(f"{icon},{path}\n") # separado por virgula
+            with open(self.dict_path, "w", encoding="utf-8") as f:
+                for icon, path in self.weather_icons.items():
+                    f.write(f"{icon},{path}\n")  # separado por virgula
             return True
         except FileNotFoundError as e:
             message = f"Couldn't find file to save dictionary:{e}"
@@ -66,8 +81,9 @@ class IconsManager:
             message = f"No permission to save dictionary in this file:{e}"
         return message
 
-
-    def get_weather_icon_path(self,weather_state: str, weather_icon_url: str) -> str|None:
+    def get_weather_icon_path(
+        self, weather_state: str, weather_icon_url: str
+    ) -> str | None:
         """
         Responsible to get the icons associated to the weather state,
         if it's present in the dictionary, otherwise new icon is added.
@@ -83,23 +99,49 @@ class IconsManager:
             None: in case it happened some error.
         """
 
-        image_path = None
+        filename = weather_state.lower().replace(" ", "_") + ".png"
+        icon_path = self.icons_folder / filename
 
-        if weather_state not in self.weather_icons:
-            print(weather_icon_url)
-            response = requests.get(f"https:{weather_icon_url}", timeout=10)  # nosec
-            print(response)
+        # Check existing cache
+        if weather_state in self.weather_icons:
 
-            if response.status_code == 200:
-                # Heavy Sunny -> lower and replace space by _
-                image_path = weather_state.lower().replace(" ", "_") + ".png"
-                image_path = f"app/icons/{image_path}"
-                with open(image_path, "wb") as f:
-                    f.write(response.content)
-                self.weather_icons[weather_state] = image_path
-                self.save_dict()
-            else:
-                raise Exception(f"Erro ao baixar imagem: {response.status_code}")
-        else:
-            image_path = self.weather_icons[weather_state]
-        return image_path
+            cached_path = pathlib.Path(self.weather_icons[weather_state])
+
+            if cached_path.exists():
+                return str(cached_path)
+
+            # Cache entry exists but file disappeared
+            del self.weather_icons[weather_state]
+
+        try:
+            url = (
+                weather_icon_url
+                if weather_icon_url.startswith("http")
+                else f"https:{weather_icon_url}"
+            )
+
+            response = requests.get(
+                url,
+                timeout=10,
+            )
+
+            response.raise_for_status()
+
+        except requests.RequestException:
+            return None
+
+        # Validate image data
+        if not response.content.startswith(b"\x89PNG"):
+            return None
+
+        try:
+            with open(icon_path, "wb") as file:
+                file.write(response.content)
+
+        except OSError:
+            return None
+
+        self.weather_icons[weather_state] = str(icon_path)
+        self.save_dict()
+
+        return str(icon_path)

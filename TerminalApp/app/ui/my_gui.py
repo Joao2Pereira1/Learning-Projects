@@ -35,6 +35,7 @@ class Ui_MainWindow(object):
         # Create plain text edit
         self.plainTextEdit = QPlainTextEdit(self.centralwidget)
         self.plainTextEdit.setObjectName("plainTextEdit")
+        self.plainTextEdit.setReadOnly(True)
         self.gridLayout.addWidget(self.plainTextEdit, 0, 0, 1, 2)
 
         # Create label to display current directory
