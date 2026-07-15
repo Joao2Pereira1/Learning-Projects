@@ -5,6 +5,6 @@ WebImages/
 WeatherApp/api_credentials.txt
 WeatherApp/.env
 .pytest_cache
-./.vscode
-./__pycache__
+.vscode/
+__pycache__/
 SportsWebApp/credentials.py
