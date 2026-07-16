@@ -200,3 +200,9 @@ pip install -r requirements.txt
    ```bash
    python main.py
    ```
+
+---
+
+# License
+
+This project is distributed under the MIT License.
