@@ -1,8 +1,8 @@
 # 🌤️ Weather App
 
-A desktop application built in **Python** with **PyQt5**, consuming the **WeatherAPI** to deliver detailed weather forecasts in a fast and optimized way. The project follows solid software architecture practices, implements local caching for assets (icons) to avoid unnecessary network requests, and features a responsive, modern graphical interface.
+A desktop application built in **Python** with **PyQt5**, using the **WeatherAPI** to deliver weather forecasts in a fast and optimized way. The project follows strict Model-View-Controller (MVC) architecture, implements local caching for assets (icons) to avoid unnecessary network requests, and features a responsive, modern graphical interface.
 
-## Overview & Functionality
+## Overview & Functionalitydetailed
 
 This application is a practical desktop project designed to test API integration, JSON data parsing, image asset caching, and GUI creation using Qt.
 
@@ -14,7 +14,7 @@ This application is a practical desktop project designed to test API integration
 
 ## User Interface (Qt)
 
-The graphical user interface was initially designed visually using **Qt Designer** and subsequently customized through code adjustments.
+The graphical user interface was initially designed visually using Qt Designer and some details were changed through code.
 
 ### Interface Architecture (Main Window)
 
@@ -56,7 +56,7 @@ MainWindow
 
 ### Key UI Workflows
 
-- **Location Lookup:** The user types a city name into `locationInput` and clicks `searchButton`. The `local` value (e.g., `"aveiro"`) is used to update the query parameters.
+- **Location Lookup:** The user types a city name into `locationInput` and clicks `searchButton` or `return` key. The `local` value (e.g., `"aveiro"`) is used to update the query parameters.
 - **Automatic Location Detection:** The "Current Location" menu item/button uses utility services to detect the user's coordinates or IP address and perform the lookup automatically.
 - **JSON Data Extraction:** Parses the nested JSON response to extract string values for the location name, country, and local time, as well as array data for the 7 forecast days.
 - **Forecast Cards:** Each of the 7 forecast cards displays:
