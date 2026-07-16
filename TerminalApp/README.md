@@ -165,3 +165,9 @@ pip install -r requirements.txt
    ```
    python app/main.py
    ```
+
+---
+
+# License
+
+This project is distributed under the MIT License.
