@@ -1,20 +1,20 @@
 # ⚡ Flash Terminal
 
-A desktop application built in **Python** with **PyQt5**, simulating an interactive terminal interface for safe and advanced local file system navigation. The project follows strict Model-View-Controller (MVC) architecture, implements a dynamic runtime style engine, features system command autocompletion, and serializes user session preferences via a persistent JSON database.
+A desktop application built in **Python** with **PyQt5**, simulating an interactive terminal interface for safe and advanced local file system navigation. The project follows strict Model-View-Controller (MVC) architecture, implements a dynamic runtime style engine, features system command autocompletion, and serializes user session preferences via a persistent JSON file.
 
 ## Overview & Functionality
 
 This application is a practical desktop system utility designed to test raw command-line text parsing, runtime stylesheet injection, interactive keyboard event monitoring, and dynamic persistent configurations in a graphical environment.
 
-- **Core Feature:** The user inputs text expressions into a terminal line. Upon submission, the app splits and lowercases tokens to match safe backend actions, rendering output blocks in real time.
+- **Core Feature:** The user inputs text expressions into a terminal line. Upon submission, the app parses the input to match backend actions, rendering the output in real time.
 
 - **Persistent Sessions:** User preferences (background color, text hex codes, and font scaling parameters) are kept safe across application restarts along with a continuous keyboard command history buffer.
 
-- **Data Optimization:** Commands are evaluated using individual argument validation loops inside the controller flow rather than generic global catchers. This ensures complex instructions containing multi-token strings remain fully intact.
+- **Parameter & Command Validation:** Instead of a generic input checker, each command is evaluated individually. The controller identifies the command, verifies the exact number of required arguments, and validates their format. This targeted validation prevents crashes and ensures complex, multi-word inputs are processed without being cut off.
 
 ## User Interface (Qt)
 
-The graphical user interface was initially designed visually using **Qt Designer** and subsequently customized through code adjustments.
+The graphical user interface was initially designed visually using **Qt Designer** and some details were changed through code.
 
 ### Interface Architecture (Main Window)
 
@@ -47,13 +47,13 @@ MainWindow
 
 ### Key UI Workflows
 
-- **Command Submission:** The user types an instruction into `lineEdit` and presses *Enter* or clicks `pushButton`. This clears the input area, records the sequence into the historical stack, and echoes the query out into `plainTextEdit`.
+- **Command Submission:** The user types an instruction into `lineEdit` and presses *Enter* or clicks `pushButton`. This clears the input area, records the sequence into the historical stack, and echoes the output to `plainTextEdit`.
 
 - **Keyboard Event Filtering:** Intercepts native application window keypress events. Pushing **ArrowUp** or **ArrowDown** navigates backward and forward through previous command memories. Pushing **Tab** matches strings against known registers using a case-insensitive `QCompleter`.
 
 - **Input Drafting Cache:** If the user drafts an incomplete text string and browses history using directional keys, the program buffers that uncommitted draft into a memory cache, restoring it safely if the user backtracks.
 
-- **Dynamic QSS Overwrites:** Customization actions unpolish existing graphical widgets, apply modified CSS strings containing user color choices, and perform hard refreshes to override active skins seamlessly.
+- **Dynamic QSS Overwrites:** Dynamic customization, by applying modified CSS strings containing user color choices, and performing hard refreshes to override active skins seamlessly.
 
 ## Project Structure
 
