@@ -96,6 +96,11 @@ pip install PyQt5
 ```bash
 python main.py
 ```
+---
+
+# License
+
+This project is distributed under the MIT License.
 
 ---
 
