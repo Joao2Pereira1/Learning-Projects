@@ -102,8 +102,3 @@ python main.py
 
 This project is distributed under the MIT License.
 
----
-
-# License
-
-This project is available under the MIT License.
