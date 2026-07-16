@@ -55,3 +55,9 @@ The game utilizes the following built-in Pygame functions to manage the applicat
 
 ### Background Music
 *   `background_music.mp3` (loops continuously throughout the match)
+
+---
+
+# License
+
+This project is distributed under the MIT License.
